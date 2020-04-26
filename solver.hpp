@@ -16,7 +16,7 @@ public:
     {
     }
 
-    friend ostream &operator<<(ostream &out, const RealVariable &c);
+    friend ostream &operator<<(ostream &out, const RealVariable &var);
     // friend vector<RealVariable> operator^(RealVariable x, double number);
     // friend vector<RealVariable> operator*(RealVariable x, double number);
     // friend vector<RealVariable> operator*(double number, RealVariable x);

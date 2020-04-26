@@ -3,20 +3,19 @@
 using namespace solver;
 using namespace std;
 
-double solve(vector<RealVariable> elements)
+double solver::solve(vector<RealVariable> elements)
 {
 
-    for (RealVariable &var : elements)
+    for (auto &var : elements)
     {
-        cout << var;
-        cout << ", ";
+        cout << var << ", ";
     }
     cout << endl;
 
     return 0.0;
 }
 
-ostream &operator<<(ostream &out, const RealVariable &var)
+ostream &solver::operator<<(ostream &out, const solver::RealVariable &var)
 {
     out << var.coefficient;
     if (var.degree > 0)
@@ -28,7 +27,7 @@ ostream &operator<<(ostream &out, const RealVariable &var)
     return out;
 }
 
-vector<RealVariable> operator*(RealVariable x, double number)
+vector<RealVariable> solver::operator*(RealVariable x, double number)
 {
     x.coefficient *= number;
     auto vec = vector<RealVariable>();
@@ -36,7 +35,7 @@ vector<RealVariable> operator*(RealVariable x, double number)
     return vec;
 }
 
-vector<RealVariable> operator*(double number, RealVariable x)
+vector<RealVariable> solver::operator*(double number, RealVariable x)
 {
     x.coefficient *= number;
     vector<RealVariable> vec;
@@ -44,7 +43,7 @@ vector<RealVariable> operator*(double number, RealVariable x)
     return vec;
 }
 
-vector<RealVariable> operator^(RealVariable x, double number)
+vector<RealVariable> solver::operator^(RealVariable x, double number)
 {
     x.degree *= number;
     vector<RealVariable> vec;
@@ -52,13 +51,13 @@ vector<RealVariable> operator^(RealVariable x, double number)
     return vec;
 }
 
-vector<RealVariable> operator+(vector<RealVariable> vec1, vector<RealVariable> vec2)
+vector<RealVariable> solver::operator+(vector<RealVariable> vec1, vector<RealVariable> vec2)
 {
     vec1.insert(vec1.end(), vec2.begin(), vec2.end());
     return vec1;
 }
 
-vector<RealVariable> operator-(vector<RealVariable> vec1, vector<RealVariable> vec2)
+vector<RealVariable> solver::operator-(vector<RealVariable> vec1, vector<RealVariable> vec2)
 {
 
     for (auto var : vec2)
@@ -70,7 +69,7 @@ vector<RealVariable> operator-(vector<RealVariable> vec1, vector<RealVariable> v
     return vec1;
 }
 
-vector<RealVariable> operator-(RealVariable var, double number)
+vector<RealVariable> solver::operator-(RealVariable var, double number)
 {
     vector<RealVariable> vec;
     RealVariable var2(-number, 0);
@@ -81,7 +80,7 @@ vector<RealVariable> operator-(RealVariable var, double number)
     return vec;
 }
 
-vector<RealVariable> operator-(vector<RealVariable> vec, double number)
+vector<RealVariable> solver::operator-(vector<RealVariable> vec, double number)
 {
     RealVariable var2(-number, 0);
 
@@ -90,7 +89,7 @@ vector<RealVariable> operator-(vector<RealVariable> vec, double number)
     return vec;
 }
 
-vector<RealVariable> operator==(vector<RealVariable> vec, double number)
+vector<RealVariable> solver::operator==(vector<RealVariable> vec, double number)
 {
     RealVariable var2(-number, 0);
 
@@ -99,12 +98,14 @@ vector<RealVariable> operator==(vector<RealVariable> vec, double number)
     return vec;
 }
 
-vector<RealVariable> operator==(vector<RealVariable> vec, vector<RealVariable> vec2)
+vector<RealVariable> solver::operator==(vector<RealVariable> vec, vector<RealVariable> vec2)
 {
 
-    for(auto &v : vec2) {
+    for (auto &v : vec2)
+    {
         v.coefficient *= -1;
         vec.push_back(v);
     }
     return vec;
 }
+
