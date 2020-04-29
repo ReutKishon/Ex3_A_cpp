@@ -64,8 +64,9 @@ ostream &solver::operator<<(ostream &out, const solver::ComplexVariable &var)
     out << var.coefficient;
     if (var.degree > 0)
     {
-        out << "x^" << var.degree;
+        out << "y^" << var.degree;
     }
+    out << "+" << var.imag_coeffient << "i";
 
     out << " ";
     return out;
@@ -189,7 +190,6 @@ vector<ComplexVariable> solver::operator+(double number, vector<ComplexVariable>
 
     return vec;
 }
-
 
 vector<ComplexVariable> solver::operator+(complex<double> number, vector<ComplexVariable> vec)
 {

@@ -20,4 +20,8 @@ TEST_CASE("basic checks:")
     CHECK((solve((x ^ 2) + 12 * x + 32) == -4 || solve((x ^ 2) + 12 * x + 32) == -8));
 }
 
-// TEST_CASE(" ")
+TEST_CASE("complex checks:")
+{
+    ComplexVariable y;
+    // CHECK((solve((y ^ 2) == 16) ==   || solve((y ^ 2) == 16) == -4 + 0i));
+}
