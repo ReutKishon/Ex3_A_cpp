@@ -1,6 +1,5 @@
 #include "solver.hpp"
 #include <bits/stdc++.h>
-// #include <complex>
 using namespace solver;
 using namespace std;
 
@@ -92,11 +91,10 @@ vector<RealVariable> solver::operator^(vector<RealVariable> vec, double number)
     {
         if (v.degree *= number < 2)
             v.degree *= number;
-            else
-            {
-                throw("degree is greater than 2!");
-            }
-            
+        else
+        {
+            throw("degree is greater than 2!");
+        }
     }
 
     return vec;
@@ -104,7 +102,8 @@ vector<RealVariable> solver::operator^(vector<RealVariable> vec, double number)
 
 vector<RealVariable> solver::operator^(RealVariable x, double number)
 {
-    if(number>2){
+    if (number > 2)
+    {
         throw("degree is greater than 2!");
     }
     x.degree = number;
