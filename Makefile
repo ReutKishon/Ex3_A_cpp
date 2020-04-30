@@ -4,7 +4,7 @@ test: Test.cpp solver.cpp solver_complex.cpp
 
 demo: demo.cpp solver.cpp solver_complex.cpp
 	/usr/bin/g++ -g demo.cpp solver.cpp solver_complex.cpp -o demo
-	./demo
+	
 
 clean: 
 	rm ./test

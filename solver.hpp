@@ -29,7 +29,6 @@ public:
     }
 
     friend ostream &operator<<(ostream &out, const ComplexVariable &var);
-
 };
 
 double solve(vector<RealVariable> elements);
@@ -38,6 +37,7 @@ vector<RealVariable> operator^(vector<RealVariable> vec, double number);
 vector<RealVariable> operator^(RealVariable x, double number);
 vector<RealVariable> operator*(RealVariable x, double number);
 vector<RealVariable> operator*(double number, RealVariable x);
+vector<RealVariable> operator*(RealVariable x1, RealVariable x);
 vector<RealVariable> operator+(vector<RealVariable> vec1, vector<RealVariable> vec2);
 vector<RealVariable> operator+(RealVariable var, double number);
 vector<RealVariable> operator+(double number, RealVariable var);
@@ -60,6 +60,7 @@ vector<ComplexVariable> operator^(vector<ComplexVariable> vec, double number);
 vector<ComplexVariable> operator^(ComplexVariable x, double number);
 vector<ComplexVariable> operator*(ComplexVariable x, double number);
 vector<ComplexVariable> operator*(double number, ComplexVariable x);
+vector<ComplexVariable> operator*(ComplexVariable y1, ComplexVariable y);
 vector<ComplexVariable> operator+(vector<ComplexVariable> vec1, vector<ComplexVariable> vec2);
 vector<ComplexVariable> operator+(ComplexVariable var, double number);
 vector<ComplexVariable> operator+(ComplexVariable var, complex<double> number);
@@ -73,11 +74,18 @@ vector<ComplexVariable> operator-(vector<ComplexVariable> vec1, vector<ComplexVa
 vector<ComplexVariable> operator-(ComplexVariable var, double number);
 vector<ComplexVariable> operator-(vector<ComplexVariable> vec, double number);
 vector<ComplexVariable> operator-(vector<ComplexVariable> vec, ComplexVariable var);
+vector<ComplexVariable> operator-(complex<double> c, vector<ComplexVariable> vec);
+vector<ComplexVariable> operator-(ComplexVariable y, complex<double> c);
+vector<ComplexVariable> operator-(complex<double> c, ComplexVariable y);
+vector<ComplexVariable> operator-(vector<ComplexVariable> vec, complex<double> c);
 vector<ComplexVariable> operator/(ComplexVariable var, int number);
 vector<ComplexVariable> operator/(vector<ComplexVariable> vec, int number);
 vector<ComplexVariable> operator==(vector<ComplexVariable> vec, ComplexVariable v);
 vector<ComplexVariable> operator==(vector<ComplexVariable> vec, double number);
 vector<ComplexVariable> operator==(vector<ComplexVariable> vec, vector<ComplexVariable> vec2);
+vector<ComplexVariable> operator==(vector<ComplexVariable> vec, complex<double> c);
+vector<ComplexVariable> operator==(double number, vector<ComplexVariable> vec);
+vector<ComplexVariable> operator==(complex<double> c, vector<ComplexVariable> vec);
 
 } // namespace solver
 

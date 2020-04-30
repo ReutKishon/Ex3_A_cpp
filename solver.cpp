@@ -84,6 +84,20 @@ vector<RealVariable> solver::operator*(double number, RealVariable x)
     vec.push_back(x);
     return vec;
 }
+
+vector<RealVariable> solver::operator*(RealVariable x1, RealVariable x)
+{
+
+    if (x.degree + x1.degree < 3)
+    {
+        vector<RealVariable> vec;
+        x1.degree += x.degree;
+        vec.push_back(x1);
+        return vec;
+    }
+    throw("the degree is greater than 2!");
+}
+
 vector<RealVariable> solver::operator^(vector<RealVariable> vec, double number)
 {
 

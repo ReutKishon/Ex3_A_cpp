@@ -89,6 +89,19 @@ vector<ComplexVariable> solver::operator*(double number, ComplexVariable x)
     return vec;
 }
 
+vector<ComplexVariable> solver::operator*(ComplexVariable y1, ComplexVariable y)
+{
+
+    if (y.degree + y1.degree < 3)
+    {
+        vector<ComplexVariable> vec;
+        y1.degree += y.degree;
+        vec.push_back(y1);
+        return vec;
+    }
+    throw("the degree is greater than 2!");
+}
+
 vector<ComplexVariable> solver::operator^(vector<ComplexVariable> vec, double number)
 {
 
