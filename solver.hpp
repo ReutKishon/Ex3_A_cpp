@@ -16,6 +16,12 @@ public:
     {
     }
 
+    RealVariable(const RealVariable &other)
+    {
+        this->degree = other.degree;
+        this->coefficient = other.coefficient;
+    }
+
     friend ostream &operator<<(ostream &out, const RealVariable &var);
 };
 

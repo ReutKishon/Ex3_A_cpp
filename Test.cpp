@@ -160,7 +160,7 @@ TEST_CASE("9:")
     CHECK(solve(-6i - 3i == -2 * y1 - 20) == -10.0 + 4.5i);
     CHECK(solve(2 * y1 - 6i - 3i == -20) == -10.0 + 4.5i);
     CHECK(solve(2 * y1 - 6i - 3i + 20 == 0) == -10.0 + 4.5i);
-    
+
     CHECK(solve(2 * y1 - 6i - 3i == -20) == -10.0 + 4.5i);
     CHECK(solve(2 * y1 - 9i == -20) == -10.0 + 4.5i);
     CHECK(solve(2 * y1 - 6i == 3i - 20) == -10.0 + 4.5i);
@@ -169,10 +169,14 @@ TEST_CASE("9:")
     CHECK(solve(2 * y1 - 6i - 3i + 20 == 0) == -10.0 + 4.5i);
     CHECK(solve((y1 ^ 2) - 5.0 == -30.0) == 0.0 - 5.0i);
     CHECK(solve(-2 * y1 - 6.0 + 2i == 6i) == -3.0 - 2.0i);
-      CHECK(solve((y1 ^ 2) == 16) == 4.0 + 0i);
+    CHECK(solve((y1 ^ 2) == 16) == 4.0 + 0i);
     CHECK(solve((y1 ^ 2) == 16) == -4.0 + 0i);
-      CHECK(solve((y1 ^ 2) == 16) == 4.0 + 0i);
+    CHECK(solve((y1 ^ 2) == 16) == 4.0 + 0i);
     CHECK(solve((y1 ^ 2) == 16) == -4.0 + 0i);
-
-
+    CHECK(solve(-6.0 - 6i == 2 * y1) == -3.0 - 3.0i);
+    CHECK(solve(-6.0 + 2i == 6i + 2 * y1) == -3.0 - 2.0i);
+    CHECK(solve(-2 * y1 - 6.0 + 2i == 6i) == -3.0 - 2.0i);
+    CHECK(solve(-6.0 + 2i - 6i == 2 * y1) == -3.0 - 2.0i);
+    CHECK(solve(3 + y1 == 6i) == 6i - 3.0);
+    CHECK(solve(3 == 6i - y1) == 6i - 3.0);
 }

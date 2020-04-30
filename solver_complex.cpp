@@ -341,6 +341,8 @@ vector<ComplexVariable> solver::operator==(vector<ComplexVariable> vec, complex<
 {
     ComplexVariable var(real(c), 0, imag(c));
     vec.push_back(var);
+
+    return vec;
 }
 
 vector<ComplexVariable> solver::operator==(double number, vector<ComplexVariable> vec)
