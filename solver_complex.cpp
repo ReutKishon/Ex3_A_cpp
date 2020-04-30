@@ -1,5 +1,6 @@
 #include "solver.hpp"
 #include <bits/stdc++.h>
+#include <complex>
 using namespace solver;
 using namespace std;
 
@@ -87,6 +88,7 @@ vector<ComplexVariable> solver::operator*(double number, ComplexVariable x)
     vec.push_back(x);
     return vec;
 }
+
 vector<ComplexVariable> solver::operator^(vector<ComplexVariable> vec, double number)
 {
 
@@ -214,7 +216,7 @@ vector<ComplexVariable> solver::operator-(vector<ComplexVariable> vec1, vector<C
 vector<ComplexVariable> solver::operator-(ComplexVariable var, double number)
 {
     vector<ComplexVariable> vec;
-    ComplexVariable var2(-number, 0);
+    ComplexVariable var2(-1 * number, 0);
 
     vec.push_back(var);
     vec.push_back(var2);
@@ -224,7 +226,7 @@ vector<ComplexVariable> solver::operator-(ComplexVariable var, double number)
 
 vector<ComplexVariable> solver::operator-(vector<ComplexVariable> vec, double number)
 {
-    ComplexVariable var2(-number, 0);
+    ComplexVariable var2(-1 * number, 0);
 
     vec.push_back(var2);
 
@@ -235,6 +237,44 @@ vector<ComplexVariable> solver::operator-(vector<ComplexVariable> vec, ComplexVa
 {
     var.coefficient *= -1;
     vec.push_back(var);
+    return vec;
+}
+
+vector<ComplexVariable> solver::operator-(complex<double> c, vector<ComplexVariable> vec)
+{
+    ComplexVariable var(real(c), 0, imag(c));
+    vec.push_back(var);
+
+    for (auto v : vec)
+    {
+        v.coefficient *= -1;
+    }
+    return vec;
+}
+
+vector<ComplexVariable> solver::operator-(vector<ComplexVariable> vec, complex<double> c)
+{
+    ComplexVariable var(-1 * real(c), 0, imag(c));
+    vec.push_back(var);
+    return vec;
+}
+
+vector<ComplexVariable> solver::operator-(complex<double> c, ComplexVariable y)
+{
+    vector<ComplexVariable> vec;
+    ComplexVariable var(real(c), 0, imag(c));
+    y.coefficient *= -1;
+    vec.push_back(var);
+    vec.push_back(y);
+    return vec;
+}
+
+vector<ComplexVariable> solver::operator-(ComplexVariable y, complex<double> c)
+{
+    vector<ComplexVariable> vec;
+    ComplexVariable var(-1 * real(c), 0, imag(c));
+    vec.push_back(var);
+    vec.push_back(y);
     return vec;
 }
 
@@ -266,7 +306,7 @@ vector<ComplexVariable> solver::operator==(vector<ComplexVariable> vec, ComplexV
 
 vector<ComplexVariable> solver::operator==(vector<ComplexVariable> vec, double number)
 {
-    ComplexVariable var2(-number, 0);
+    ComplexVariable var2(-1 * number, 0);
 
     vec.push_back(var2);
 
@@ -281,5 +321,29 @@ vector<ComplexVariable> solver::operator==(vector<ComplexVariable> vec, vector<C
         v.coefficient *= -1;
         vec.push_back(v);
     }
+    return vec;
+}
+
+vector<ComplexVariable> solver::operator==(vector<ComplexVariable> vec, complex<double> c)
+{
+    ComplexVariable var(real(c), 0, imag(c));
+    vec.push_back(var);
+}
+
+vector<ComplexVariable> solver::operator==(double number, vector<ComplexVariable> vec)
+{
+
+    ComplexVariable var2(-1 * number, 0);
+
+    vec.push_back(var2);
+
+    return vec;
+}
+
+vector<ComplexVariable> solver::operator==(complex<double> c, vector<ComplexVariable> vec)
+{
+
+    ComplexVariable var(real(c), 0, imag(c));
+    vec.push_back(var);
     return vec;
 }
