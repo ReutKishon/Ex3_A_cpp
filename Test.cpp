@@ -167,8 +167,8 @@ TEST_CASE("9:")
     CHECK(solve(-6i - 3i == -2 * y1 - 20) == -10.0 + 4.5i);
     CHECK(solve(2 * y1 - 6i - 3i == -20) == -10.0 + 4.5i);
     CHECK(solve(2 * y1 - 6i - 3i + 20 == 0) == -10.0 + 4.5i);
-    CHECK(solve((y ^ 2) - 5.0 == -30.0) == 0.0 - 5.0i);
-    CHECK(solve(-2 * y - 6.0 + 2i == 6i) == -3.0 - 2.0i);
+    CHECK(solve((y1 ^ 2) - 5.0 == -30.0) == 0.0 - 5.0i);
+    CHECK(solve(-2 * y1 - 6.0 + 2i == 6i) == -3.0 - 2.0i);
 
 
 }
