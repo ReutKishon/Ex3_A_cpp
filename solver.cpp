@@ -1,5 +1,6 @@
 #include "solver.hpp"
 #include <bits/stdc++.h>
+#include <cmath>
 using namespace solver;
 using namespace std;
 
@@ -10,6 +11,13 @@ bool compare_variable_by_degree(RealVariable v1, RealVariable v2)
 
 vector<RealVariable> minimize(vector<RealVariable> vec)
 {
+
+    for (auto &var : vec)
+    {
+        cout << var << ", ";
+    }
+    cout << endl;
+
     sort(vec.begin(), vec.end(), compare_variable_by_degree);
     int degree = vec.front().degree;
     int current_degree = 0;
@@ -37,24 +45,116 @@ vector<RealVariable> minimize(vector<RealVariable> vec)
             if (i == (vec.size() - 1))
 
             {
+
                 RealVariable new_element(coef, degree);
                 new_vec.push_back(new_element);
             }
         }
     }
+
     return new_vec;
 }
 
-double solver::solve(vector<RealVariable> elements)
-{
-    elements = minimize(elements);
-    for (auto &var : elements)
-    {
-        cout << var << ", ";
-    }
-    cout << endl;
+// double solver::solve(vector<RealVariable> elements)
+// {
+//     elements = minimize(elements);
+//     for (auto &var : elements)
+//     {
+//         cout << var << ", ";
+//     }
+//     cout << endl;
 
-    return 0.0;
+//     return 0.0;
+// }
+
+double linear_solver(vector<RealVariable> elements)
+{
+    double result = 0;
+
+    for (unsigned i = 0; i < elements.size(); i++)
+    {
+        int curr_degree = elements.at(i).degree;
+        double curr_coef = elements.at(i).coefficient;
+
+        if (curr_degree == 0)
+        {
+            curr_coef *= -1;
+            result += curr_coef;
+        }
+        else
+        {
+            if (curr_coef != 1)
+            {
+                for (auto &v : elements)
+                {
+                    v.coefficient /= curr_coef;
+                }
+            }
+        }
+    }
+    return result;
+}
+
+double solver::solve(vector<RealVariable> elements)
+
+{
+
+    elements = minimize(elements);
+    double a, b, c;
+    a = b = c = 0;
+    int index = 0;
+    while (index < elements.size())
+    {
+        RealVariable curr_element = elements.at(index);
+        int element_degree = curr_element.degree;
+        switch (element_degree)
+        {
+        case 0:
+
+            c = curr_element.coefficient;
+            cout << "c = " << c << endl;
+
+            break;
+        case 1:
+            b = curr_element.coefficient;
+            cout << "b = " << b << endl;
+
+            break;
+        case 2:
+            a = curr_element.coefficient;
+            cout << "a = " << a << endl;
+
+            break;
+        }
+        index++;
+    }
+
+    if (a == 0)
+    {
+        return linear_solver(elements);
+    }
+
+    double discriminant = pow(b, 2) - 4 * a * c;
+    double x1, x2;
+
+    if (discriminant > 0)
+    {
+        x1 = (-b + sqrt(discriminant)) / (2 * a);
+        x2 = (-b - sqrt(discriminant)) / (2 * a);
+
+        cout << "Roots are real and different." << endl;
+        cout << "x1 = " << x1 << endl;
+        cout << "x2 = " << x2 << endl;
+        return x1; // check if thre is option to choose randomly;
+    }
+
+    else if (discriminant == 0)
+    {
+        cout << "Roots are real and same." << endl;
+        x1 = (-b + sqrt(discriminant)) / (2 * a);
+        cout << "x1 = x2 =" << x1 << endl;
+        return x1;
+    }
 }
 
 ostream &solver::operator<<(ostream &out, const solver::RealVariable &var)
@@ -172,6 +272,16 @@ vector<RealVariable> solver::operator+(double number, vector<RealVariable> vec)
     return vec;
 }
 
+// vector<RealVariable> solver::operator-(RealVariable x, RealVariable x1)
+// {
+
+//     vector<RealVariable> vec;
+//     vec.push_back(x);
+//     x1.coefficient *= -1;
+//     vec.push_back(x1);
+//     return vec;
+// }
+
 vector<RealVariable> solver::operator-(vector<RealVariable> vec1, vector<RealVariable> vec2)
 {
 
@@ -206,8 +316,17 @@ vector<RealVariable> solver::operator-(vector<RealVariable> vec, double number)
 
 vector<RealVariable> solver::operator-(vector<RealVariable> vec, RealVariable var)
 {
-    var.coefficient *= -1;
-    vec.push_back(var);
+    if (var.coefficient >= 0)
+    {
+
+        var.coefficient *= -1;
+        vec.push_back(var);
+    }
+    else
+    {
+        vec.push_back(var);
+    }
+
     return vec;
 }
 
@@ -223,7 +342,7 @@ vector<RealVariable> solver::operator/(vector<RealVariable> vec, int number)
 {
     for (auto &v : vec)
     {
-        v.coefficient /= 2;
+        v.coefficient /= number;
     }
 
     return vec;

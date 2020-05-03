@@ -49,6 +49,7 @@ vector<RealVariable> operator+(RealVariable var, double number);
 vector<RealVariable> operator+(double number, RealVariable var);
 vector<RealVariable> operator+(vector<RealVariable> vec, double number);
 vector<RealVariable> operator+(double number, vector<RealVariable> vec);
+vector<RealVariable> operator-(RealVariable x, RealVariable x1);
 vector<RealVariable> operator-(vector<RealVariable> vec1, vector<RealVariable> vec2);
 vector<RealVariable> operator-(RealVariable var, double number);
 vector<RealVariable> operator-(vector<RealVariable> vec, double number);
