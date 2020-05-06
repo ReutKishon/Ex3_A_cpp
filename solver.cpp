@@ -468,7 +468,7 @@ bool compare_variable_by_degree_complex(ComplexVariable v1, ComplexVariable v2)
 vector<ComplexVariable> minimize(vector<ComplexVariable> vec)
 {
 
-    sort(vec.begin(), vec.end(), compare_variable_by_degree);
+    sort(vec.begin(), vec.end(), compare_variable_by_degree_complex);
     int degree = vec.front().degree;
     double coef = vec.front().coefficient;
     double imag_coef = vec.front().imag_coeffient;

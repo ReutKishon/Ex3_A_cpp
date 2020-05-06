@@ -24,14 +24,24 @@ namespace solver
 
         friend ostream &operator<<(ostream &out, const RealVariable &var);
     };
-
-    class ComplexVariable : public RealVariable
+    // : public RealVariable
+    class ComplexVariable
     {
     public:
+        double coefficient;
+        int degree;
         double imag_coeffient;
-        ComplexVariable(double coef = 1, int deg = 1, double imag_coef = 0) : RealVariable{coef, deg},
-                                                                              imag_coeffient(imag_coef)
+        ComplexVariable(double coef = 1, int deg = 1, double imag_coef = 0) : coefficient(coef), degree(deg), imag_coeffient(imag_coef)
+        // : RealVariable{coef, deg},
+        //
         {
+        }
+
+        ComplexVariable(const ComplexVariable &other)
+        {
+            this->degree = other.degree;
+            this->coefficient = other.coefficient;
+            this->imag_coeffient = other.imag_coeffient;
         }
 
         friend ostream &operator<<(ostream &out, const ComplexVariable &var);
