@@ -502,3 +502,6 @@ vector<ComplexVariable> solver::operator==(double number, complex<double> c)
 }
 
 vector<ComplexVariable> solver::operator==(ComplexVariable v, vector<ComplexVariable> vec)
+{
+    
+}
