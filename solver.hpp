@@ -61,6 +61,7 @@ namespace solver
     vector<RealVariable> operator/(RealVariable var, RealVariable var2);
     vector<RealVariable> operator/(RealVariable var, int number);
     vector<RealVariable> operator/(vector<RealVariable> vec, int number);
+    vector<RealVariable> operator==(RealVariable v1, RealVariable v);
     vector<RealVariable> operator==(vector<RealVariable> vec, RealVariable v);
     vector<RealVariable> operator==(vector<RealVariable> vec, double number);
     vector<RealVariable> operator==(vector<RealVariable> vec, vector<RealVariable> vec2);

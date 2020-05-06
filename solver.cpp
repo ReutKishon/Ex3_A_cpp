@@ -50,18 +50,6 @@ vector<RealVariable> minimize(vector<RealVariable> vec)
     return new_vec;
 }
 
-// double solver::solve(vector<RealVariable> elements)
-// {
-//     elements = minimize(elements);
-//     for (auto &var : elements)
-//     {
-//         cout << var << ", ";
-//     }
-//     cout << endl;
-
-//     return 0.0;
-// }
-
 double linear_solver(vector<RealVariable> elements)
 {
     double result = 0;
@@ -163,7 +151,7 @@ double solver::solve(vector<RealVariable> elements)
     throw("No solution!");
 }
 
-ostream &solver::operator<<(ostream &out, const solver::RealVariable &var)
+ostream &operator<<(ostream &out, const solver::RealVariable &var)
 {
     out << var.coefficient;
     if (var.degree > 0)
@@ -402,6 +390,7 @@ vector<RealVariable> solver::operator/(vector<RealVariable> vec, RealVariable va
         }
         throw("not valid operation!");
     }
+    throw("not valid operation!");
 }
 
 vector<RealVariable> solver::operator/(RealVariable var, int number)
@@ -429,6 +418,15 @@ vector<RealVariable> solver::operator/(vector<RealVariable> vec, int number)
         v.coefficient /= number;
     }
 
+    return vec;
+}
+
+vector<RealVariable> solver::operator==(RealVariable v1, RealVariable v)
+{
+    vector<RealVariable> vec;
+    v.coefficient *= -1;
+    vec.push_back(v);
+    vec.push_back(v1);
     return vec;
 }
 
@@ -478,12 +476,6 @@ vector<ComplexVariable> minimize(vector<ComplexVariable> vec)
 
     vector<ComplexVariable> new_vec;
 
-    for (auto &var : vec)
-    {
-        cout << var << ", ";
-    }
-    cout << endl;
-
     for (unsigned i = 1; i < vec.size(); i++)
     {
         current_degree = vec.at(i).degree;
@@ -515,16 +507,11 @@ vector<ComplexVariable> minimize(vector<ComplexVariable> vec)
         }
     }
 
-    for (auto &var : new_vec)
-    {
-        cout << var << ", ";
-    }
-    cout << endl;
-
+    
     return new_vec;
 }
 
-complex<double> linear_solver(vector<ComplexVariable> elements)
+complex<double> linear_solver_complex(vector<ComplexVariable> elements)
 {
     complex<double> result(0, 0);
     double result_coef;
@@ -575,17 +562,14 @@ std::complex<double> solver::solve(vector<ComplexVariable> elements)
         case 0:
 
             c = curr_element.coefficient;
-            cout << "c = " << c << endl;
 
             break;
         case 1:
             b = curr_element.coefficient;
-            cout << "b = " << b << endl;
 
             break;
         case 2:
             a = curr_element.coefficient;
-            cout << "a = " << a << endl;
 
             break;
         }
@@ -594,7 +578,7 @@ std::complex<double> solver::solve(vector<ComplexVariable> elements)
 
     if (a == 0)
     {
-        return linear_solver(elements);
+        return linear_solver_complex(elements);
     }
 
     complex<double> x1;
@@ -636,7 +620,7 @@ std::complex<double> solver::solve(vector<ComplexVariable> elements)
     }
 }
 
-ostream &solver::operator<<(ostream &out, const solver::ComplexVariable &var)
+ostream &operator<<(ostream &out, const solver::ComplexVariable &var)
 {
     out << var.coefficient;
     if (var.degree > 0)
