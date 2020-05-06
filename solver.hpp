@@ -1,5 +1,7 @@
 #ifndef SOLVER_H_
 #define SOLVER_H_
+#pragma once
+
 #include <complex>
 #include <iostream>
 #include <string>
