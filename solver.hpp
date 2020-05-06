@@ -41,6 +41,8 @@ namespace solver
 
     vector<RealVariable> operator^(vector<RealVariable> vec, double number);
     vector<RealVariable> operator^(RealVariable x, double number);
+    vector<RealVariable> operator*(double num, vector<RealVariable> vec);
+    vector<RealVariable> operator*(vector<RealVariable> vec, double num);
     vector<RealVariable> operator*(RealVariable x, double number);
     vector<RealVariable> operator*(double number, RealVariable x);
     vector<RealVariable> operator*(RealVariable x1, RealVariable x);
@@ -55,6 +57,8 @@ namespace solver
     vector<RealVariable> operator-(RealVariable var, double number);
     vector<RealVariable> operator-(vector<RealVariable> vec, double number);
     vector<RealVariable> operator-(vector<RealVariable> vec, RealVariable var);
+    vector<RealVariable> operator/(vector<RealVariable> vec, RealVariable var);
+    vector<RealVariable> operator/(RealVariable var, RealVariable var2);
     vector<RealVariable> operator/(RealVariable var, int number);
     vector<RealVariable> operator/(vector<RealVariable> vec, int number);
     vector<RealVariable> operator==(vector<RealVariable> vec, RealVariable v);

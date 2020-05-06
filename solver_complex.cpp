@@ -4,7 +4,6 @@
 using namespace solver;
 using namespace std;
 
-// complex methods
 
 bool compare_variable_by_degree(ComplexVariable v1, ComplexVariable v2)
 {
