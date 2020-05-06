@@ -88,17 +88,22 @@ namespace solver
     vector<ComplexVariable> operator-(vector<ComplexVariable> vec, complex<double> c);
     vector<ComplexVariable> operator-(double number, complex<double> c);
     vector<ComplexVariable> operator-(double number, ComplexVariable y);
-    vector<ComplexVariable> operator/(ComplexVariable var, int number);
-    vector<ComplexVariable> operator/(vector<ComplexVariable> vec, int number);
+    vector<ComplexVariable> operator/(ComplexVariable var, double number);
+    vector<ComplexVariable> operator/(vector<ComplexVariable> vec, double number);
     vector<ComplexVariable> operator==(vector<ComplexVariable> vec, ComplexVariable v);
     vector<ComplexVariable> operator==(vector<ComplexVariable> vec, double number);
     vector<ComplexVariable> operator==(vector<ComplexVariable> vec, vector<ComplexVariable> vec2);
     vector<ComplexVariable> operator==(vector<ComplexVariable> vec, complex<double> c);
     vector<ComplexVariable> operator==(double number, vector<ComplexVariable> vec);
     vector<ComplexVariable> operator==(complex<double> c, vector<ComplexVariable> vec);
-    vector<ComplexVariable> operator==(ComplexVariable v, vector<ComplexVariable> vec);
     vector<ComplexVariable> operator==(double number, ComplexVariable y);
     vector<ComplexVariable> operator==(double number, complex<double> c);
+    vector<ComplexVariable> operator==(ComplexVariable v, vector<ComplexVariable> vec);
+    vector<ComplexVariable> operator==(ComplexVariable v, ComplexVariable v1);
+    vector<ComplexVariable> operator==(ComplexVariable y, double number);
+    vector<ComplexVariable> operator==(ComplexVariable y, complex<double> c);
+    vector<ComplexVariable> operator==(complex<double> c, ComplexVariable y);
+    vector<ComplexVariable> operator==(complex<double> c, double number);
 
 } // namespace solver
 
