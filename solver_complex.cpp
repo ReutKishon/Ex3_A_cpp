@@ -13,51 +13,136 @@ bool compare_variable_by_degree(ComplexVariable v1, ComplexVariable v2)
 
 vector<ComplexVariable> minimize(vector<ComplexVariable> vec)
 {
+
     sort(vec.begin(), vec.end(), compare_variable_by_degree);
     int degree = vec.front().degree;
-    int current_degree = 0;
     double coef = vec.front().coefficient;
+    double imag_coef = vec.front().imag_coeffient;
+    int current_degree = 0;
+
     vector<ComplexVariable> new_vec;
+
+    for (auto &var : vec)
+    {
+        cout << var << ", ";
+    }
+    cout << endl;
+
     for (unsigned i = 1; i < vec.size(); i++)
     {
         current_degree = vec.at(i).degree;
         if (current_degree == degree)
         {
             coef += vec.at(i).coefficient;
+            imag_coef += vec.at(i).imag_coeffient;
             if (i == (vec.size() - 1))
 
             {
-                ComplexVariable new_element(coef, degree);
+                ComplexVariable new_element(coef, degree, imag_coef);
                 new_vec.push_back(new_element);
             }
         }
         else
         {
-            ComplexVariable new_element(coef, degree);
+            ComplexVariable new_element(coef, degree, imag_coef);
             new_vec.push_back(new_element);
             degree = vec.at(i).degree;
             coef = vec.at(i).coefficient;
+            imag_coef = vec.at(i).imag_coeffient;
             if (i == (vec.size() - 1))
 
             {
-                ComplexVariable new_element(coef, degree);
+
+                ComplexVariable new_element(coef, degree, imag_coef);
                 new_vec.push_back(new_element);
             }
         }
     }
-    return new_vec;
-}
 
-std::complex<double> solver::solve(vector<ComplexVariable> elements)
-{
-    elements = minimize(elements);
-    for (auto &var : elements)
+    for (auto &var : new_vec)
     {
         cout << var << ", ";
     }
     cout << endl;
 
-    return 0.0;
+    return new_vec;
+}
+
+complex<double> linear_solver(vector<ComplexVariable> elements)
+{
+    complex<double> result(0, 0);
+    double result_coef;
+    double result_imag_coef;
+
+    for (unsigned i = 0; i < elements.size(); i++)
+    {
+        int curr_degree = elements.at(i).degree;
+        double curr_coef = elements.at(i).coefficient;
+        double curr_imag_coef = elements.at(i).imag_coeffient;
+
+        if (curr_degree == 0)
+        {
+
+            result.real(-curr_coef);
+            result.imag(-curr_imag_coef);
+        }
+        else
+        {
+            if (curr_coef != 1 && curr_degree == 1)
+            {
+                for (auto &v : elements)
+                {
+                    v.coefficient /= curr_coef;
+                    v.imag_coeffient /= curr_coef;
+                }
+            }
+        }
+    }
+    return result;
+}
+
+std::complex<double> solver::solve(vector<ComplexVariable> elements)
+{
+
+    elements = minimize(elements);
+    double a, b, c, z;
+    a = b = c = z = 0;
+    int index = 0;
+    while (index < elements.size())
+    {
+        ComplexVariable curr_element = elements.at(index);
+        int element_degree = curr_element.degree;
+        switch (element_degree)
+        {
+        case 0:
+
+            c = curr_element.coefficient;
+            z = curr_element.imag_coeffient;
+            cout << "c = " << c << endl;
+            cout << "z = " << z << endl;
+
+            break;
+        case 1:
+            b = curr_element.coefficient;
+            cout << "b = " << b << endl;
+
+            break;
+        case 2:
+            a = curr_element.coefficient;
+            cout << "a = " << a << endl;
+
+            break;
+        }
+        index++;
+    }
+
+    if (a == 0)
+    {
+        return linear_solver(elements);
+    }
+
+    double discriminant = pow(b, 2) - 4 * a * c;
+    double x1, x2;
 }
 
 ostream &solver::operator<<(ostream &out, const solver::ComplexVariable &var)
@@ -258,7 +343,7 @@ vector<ComplexVariable> solver::operator-(complex<double> c, vector<ComplexVaria
     ComplexVariable var(real(c), 0, imag(c));
     vec.push_back(var);
 
-    for (auto v : vec)
+    for (auto &v : vec)
     {
         v.coefficient *= -1;
     }
@@ -272,11 +357,34 @@ vector<ComplexVariable> solver::operator-(vector<ComplexVariable> vec, complex<d
     return vec;
 }
 
+vector<ComplexVariable> solver::operator-(double number, complex<double> c)
+{
+
+    vector<ComplexVariable> vec;
+    ComplexVariable var1(number, 0, 0);
+    ComplexVariable var2(-1 * real(c), 0, -1 * imag(c));
+    vec.push_back(var1);
+    vec.push_back(var2);
+    return vec;
+}
+
+vector<ComplexVariable> solver::operator-(double number, ComplexVariable y)
+{
+    vector<ComplexVariable> vec;
+    ComplexVariable var1(number, 0, 0);
+    y.coefficient *= -1;
+    y.imag_coeffient *= -1;
+    vec.push_back(var1);
+    vec.push_back(y);
+    return vec;
+}
+
 vector<ComplexVariable> solver::operator-(complex<double> c, ComplexVariable y)
 {
     vector<ComplexVariable> vec;
     ComplexVariable var(real(c), 0, imag(c));
     y.coefficient *= -1;
+    y.imag_coeffient *= -1;
     vec.push_back(var);
     vec.push_back(y);
     return vec;
@@ -293,7 +401,7 @@ vector<ComplexVariable> solver::operator-(ComplexVariable y, complex<double> c)
 
 vector<ComplexVariable> solver::operator/(ComplexVariable var, int number)
 {
-    var.coefficient /= 2;
+    var.coefficient /= number;
     vector<ComplexVariable> vec;
     vec.push_back(var);
     return vec;
@@ -303,7 +411,7 @@ vector<ComplexVariable> solver::operator/(vector<ComplexVariable> vec, int numbe
 {
     for (auto &v : vec)
     {
-        v.coefficient /= 2;
+        v.coefficient /= number;
     }
 
     return vec;
@@ -332,6 +440,7 @@ vector<ComplexVariable> solver::operator==(vector<ComplexVariable> vec, vector<C
     for (auto &v : vec2)
     {
         v.coefficient *= -1;
+        v.imag_coeffient *= -1;
         vec.push_back(v);
     }
     return vec;
@@ -339,7 +448,7 @@ vector<ComplexVariable> solver::operator==(vector<ComplexVariable> vec, vector<C
 
 vector<ComplexVariable> solver::operator==(vector<ComplexVariable> vec, complex<double> c)
 {
-    ComplexVariable var(real(c), 0, imag(c));
+    ComplexVariable var(-1 * real(c), 0, -1 * imag(c));
     vec.push_back(var);
 
     return vec;
@@ -358,7 +467,38 @@ vector<ComplexVariable> solver::operator==(double number, vector<ComplexVariable
 vector<ComplexVariable> solver::operator==(complex<double> c, vector<ComplexVariable> vec)
 {
 
-    ComplexVariable var(real(c), 0, imag(c));
+    ComplexVariable var(-1 * real(c), 0, -1 * imag(c));
     vec.push_back(var);
     return vec;
 }
+
+vector<ComplexVariable> solver::operator==(ComplexVariable v, vector<ComplexVariable> vec)
+{
+    v.coefficient *= -1;
+    v.imag_coeffient *= -1;
+    vec.push_back(v);
+    return vec;
+}
+
+vector<ComplexVariable> solver::operator==(double number, ComplexVariable y)
+{
+    vector<ComplexVariable> vec;
+    ComplexVariable var1(number, 0, 0);
+    y.coefficient *= -1;
+    y.imag_coeffient *= -1;
+    vec.push_back(var1);
+    vec.push_back(y);
+    return vec;
+}
+
+vector<ComplexVariable> solver::operator==(double number, complex<double> c)
+{
+    vector<ComplexVariable> vec;
+    ComplexVariable var1(number, 0, 0);
+    ComplexVariable var2(-1 * real(c), 0, -1 * imag(c));
+    vec.push_back(var1);
+    vec.push_back(var2);
+    return vec;
+}
+
+vector<ComplexVariable> solver::operator==(ComplexVariable v, vector<ComplexVariable> vec)
