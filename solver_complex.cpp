@@ -143,33 +143,41 @@ std::complex<double> solver::solve(vector<ComplexVariable> elements)
 
     complex<double> x1;
     complex<double> x2;
+    float discriminant, realPart, imaginaryPart;
 
-    if (a < 0.000001) // ==0
+    discriminant = b * b - 4 * a * c;
+
+    if (discriminant > 0)
     {
-        if (b > 0.000001)
-        { // !=0
-            x1.real(-c / b);
-            x2.real(-c / b);
-        }
-        else if (c > 0.00001)
-            throw("no solutions");
+        x1.real((-b + sqrt(discriminant)) / (2 * a));
+        x1.imag(0);
+        x2.real((-b - sqrt(discriminant)) / (2 * a));
+        x2.imag(0);
+        cout << "x1 = " << x1 << endl;
+        cout << "x2 = " << x2 << endl;
         return x1;
     }
 
-    double delta = b * b - 4 * a * c;
-    if (delta >= 0)
+    else if (discriminant == 0)
     {
-        x1.real((-b - sqrt(delta)) / 2 / a);
-        x2.real((-b + sqrt(delta)) / 2 / a);
+        x1.real((-b + sqrt(discriminant)) / (2 * a));
+        x1.imag(0);
+        cout << "x1 = x2 =" << x1 << endl;
+        return x1;
     }
+
     else
     {
-        x1.real(-b / 2 / a);
-        x2.real(-b / 2 / a);
-        x1.imag(sqrt(-delta) / 2 / a);
-        x2.imag(-sqrt(-delta) / 2 / a);
+        realPart = -b / (2 * a);
+        imaginaryPart = sqrt(-discriminant) / (2 * a);
+        x1.real(realPart);
+        x1.imag(imaginaryPart);
+        x2.real(realPart);
+        x2.imag(-imaginaryPart);
+        cout << "x1 = " << realPart << "+" << imaginaryPart << "i" << endl;
+        cout << "x2 = " << realPart << "-" << imaginaryPart << "i" << endl;
+        return x2;
     }
-    return x1;
 }
 
 ostream &solver::operator<<(ostream &out, const solver::ComplexVariable &var)
@@ -232,10 +240,10 @@ vector<ComplexVariable> solver::operator*(ComplexVariable y1, ComplexVariable y)
 
 vector<ComplexVariable> solver::operator^(ComplexVariable x, double number)
 {
-    if (x.degree + number < 3)
+    if (x.degree * number < 3)
     {
         auto vec = vector<ComplexVariable>();
-        x.degree += number;
+        x.degree *= number;
         vec.push_back(x);
         return vec;
     }
@@ -424,6 +432,16 @@ vector<ComplexVariable> solver::operator-(ComplexVariable y, complex<double> c)
     ComplexVariable var(-1 * real(c), 0, -1 * imag(c));
     vec.push_back(var);
     vec.push_back(y);
+    return vec;
+}
+
+vector<ComplexVariable> solver::operator-(complex<double> c, double number)
+{
+    vector<ComplexVariable> vec;
+    ComplexVariable var1(real(c), 0, imag(c));
+    ComplexVariable var2(-number, 0, 0);
+    vec.push_back(var1);
+    vec.push_back(var2);
     return vec;
 }
 

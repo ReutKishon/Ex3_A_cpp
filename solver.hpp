@@ -88,6 +88,7 @@ namespace solver
     vector<ComplexVariable> operator-(vector<ComplexVariable> vec, complex<double> c);
     vector<ComplexVariable> operator-(double number, complex<double> c);
     vector<ComplexVariable> operator-(double number, ComplexVariable y);
+    vector<ComplexVariable> operator-(complex<double> c, double number);
     vector<ComplexVariable> operator/(ComplexVariable var, double number);
     vector<ComplexVariable> operator/(vector<ComplexVariable> vec, double number);
     vector<ComplexVariable> operator==(vector<ComplexVariable> vec, ComplexVariable v);
