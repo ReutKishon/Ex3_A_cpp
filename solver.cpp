@@ -3,6 +3,10 @@
 #include <cmath>
 #include <complex>
 #include <vector>
+#include <iostream>
+#include <string>
+#include <stdbool.h>
+
 using namespace solver;
 using namespace std;
 

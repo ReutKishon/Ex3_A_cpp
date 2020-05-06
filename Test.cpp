@@ -4,6 +4,10 @@
 #include <complex>
 #include <math.h>
 #include <vector>
+#include <iostream>
+#include <string>
+#include <stdbool.h>
+
 
 using namespace std;
 using namespace solver;

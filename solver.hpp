@@ -2,7 +2,10 @@
 #define SOLVER_H_
 #include <complex>
 #include <iostream>
+#include <string>
+#include <stdbool.h>
 #include <vector>
+
 using namespace std;
 
 namespace solver
