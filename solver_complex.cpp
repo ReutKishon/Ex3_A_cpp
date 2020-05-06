@@ -98,6 +98,8 @@ complex<double> linear_solver(vector<ComplexVariable> elements)
             }
         }
     }
+    cout << "x1 = " << result << endl;
+
     return result;
 }
 

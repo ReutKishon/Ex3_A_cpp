@@ -28,7 +28,7 @@ namespace solver
     class ComplexVariable : public RealVariable
     {
     public:
-        int imag_coeffient;
+        double imag_coeffient;
         ComplexVariable(double coef = 1, int deg = 1, double imag_coef = 0) : RealVariable{coef, deg},
                                                                               imag_coeffient(imag_coef)
         {
