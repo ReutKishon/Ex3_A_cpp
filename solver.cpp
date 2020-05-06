@@ -163,7 +163,7 @@ ostream &operator<<(ostream &out, const solver::RealVariable &var)
     return out;
 }
 
-vector<RealVariable> solver::operator*(double num, vector<RealVariable> vec)
+vector<RealVariable> solver::operator*(int num, vector<RealVariable> vec)
 {
 
     for (auto &var : vec)
@@ -173,7 +173,7 @@ vector<RealVariable> solver::operator*(double num, vector<RealVariable> vec)
     return vec;
 }
 
-vector<RealVariable> solver::operator*(vector<RealVariable> vec, double num)
+vector<RealVariable> solver::operator*(vector<RealVariable> vec, int num)
 {
     for (auto &var : vec)
     {
@@ -182,7 +182,7 @@ vector<RealVariable> solver::operator*(vector<RealVariable> vec, double num)
     return vec;
 }
 
-vector<RealVariable> solver::operator*(RealVariable x, double number)
+vector<RealVariable> solver::operator*(RealVariable x, int number)
 {
     x.coefficient *= number;
     auto vec = vector<RealVariable>();
@@ -190,7 +190,7 @@ vector<RealVariable> solver::operator*(RealVariable x, double number)
     return vec;
 }
 
-vector<RealVariable> solver::operator*(double number, RealVariable x)
+vector<RealVariable> solver::operator*(int number, RealVariable x)
 {
     x.coefficient *= number;
     vector<RealVariable> vec;
@@ -211,7 +211,7 @@ vector<RealVariable> solver::operator*(RealVariable x1, RealVariable x)
     throw("the degree is greater than 2!");
 }
 
-vector<RealVariable> solver::operator^(vector<RealVariable> vec, double number)
+vector<RealVariable> solver::operator^(vector<RealVariable> vec, int number)
 {
     if (number > 2)
     {
@@ -249,7 +249,7 @@ vector<RealVariable> solver::operator^(vector<RealVariable> vec, double number)
     throw("the degree is greater than 2!");
 }
 
-vector<RealVariable> solver::operator^(RealVariable x, double number)
+vector<RealVariable> solver::operator^(RealVariable x, int number)
 {
     if (number > 2 || x.degree * number > 2)
     {
@@ -267,7 +267,7 @@ vector<RealVariable> solver::operator+(vector<RealVariable> vec1, vector<RealVar
     return vec1;
 }
 
-vector<RealVariable> solver::operator+(RealVariable var, double number)
+vector<RealVariable> solver::operator+(RealVariable var, int number)
 {
     vector<RealVariable> vec;
     RealVariable var2(number, 0);
@@ -278,7 +278,7 @@ vector<RealVariable> solver::operator+(RealVariable var, double number)
     return vec;
 }
 
-vector<RealVariable> solver::operator+(double number, RealVariable var)
+vector<RealVariable> solver::operator+(int number, RealVariable var)
 {
     vector<RealVariable> vec;
     RealVariable var2(number, 0);
@@ -289,7 +289,7 @@ vector<RealVariable> solver::operator+(double number, RealVariable var)
     return vec;
 }
 
-vector<RealVariable> solver::operator+(vector<RealVariable> vec, double number)
+vector<RealVariable> solver::operator+(vector<RealVariable> vec, int number)
 {
     RealVariable var2(number, 0);
 
@@ -298,7 +298,7 @@ vector<RealVariable> solver::operator+(vector<RealVariable> vec, double number)
     return vec;
 }
 
-vector<RealVariable> solver::operator+(double number, vector<RealVariable> vec)
+vector<RealVariable> solver::operator+(int number, vector<RealVariable> vec)
 {
     RealVariable var2(number, 0);
 
@@ -329,7 +329,7 @@ vector<RealVariable> solver::operator-(vector<RealVariable> vec1, vector<RealVar
     return vec1;
 }
 
-vector<RealVariable> solver::operator-(RealVariable var, double number)
+vector<RealVariable> solver::operator-(RealVariable var, int number)
 {
     vector<RealVariable> vec;
     RealVariable var2(-number, 0);
@@ -340,7 +340,7 @@ vector<RealVariable> solver::operator-(RealVariable var, double number)
     return vec;
 }
 
-vector<RealVariable> solver::operator-(vector<RealVariable> vec, double number)
+vector<RealVariable> solver::operator-(vector<RealVariable> vec, int number)
 {
     RealVariable var2(-number, 0);
 
@@ -438,7 +438,7 @@ vector<RealVariable> solver::operator==(vector<RealVariable> vec, RealVariable v
     return vec;
 }
 
-vector<RealVariable> solver::operator==(vector<RealVariable> vec, double number)
+vector<RealVariable> solver::operator==(vector<RealVariable> vec, int number)
 {
     RealVariable var2(-number, 0);
 
