@@ -2,6 +2,7 @@
 #include <bits/stdc++.h>
 #include <cmath>
 #include <complex>
+#include <vector>
 using namespace solver;
 using namespace std;
 
