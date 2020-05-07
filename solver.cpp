@@ -10,12 +10,12 @@
 using namespace solver;
 using namespace std;
 
-bool compare_variable_by_degree(RealVariable v1, RealVariable v2)
+bool solver::compare_variable_by_degree(RealVariable v1, RealVariable v2)
 {
     return v1.degree > v2.degree;
 }
 
-vector<RealVariable> minimize(vector<RealVariable> vec)
+vector<RealVariable> solver::minimize(vector<RealVariable> vec)
 {
 
     sort(vec.begin(), vec.end(), compare_variable_by_degree);
@@ -55,7 +55,7 @@ vector<RealVariable> minimize(vector<RealVariable> vec)
     return new_vec;
 }
 
-double linear_solver(vector<RealVariable> elements)
+double solver::linear_solver(vector<RealVariable> elements)
 {
     double result = 0;
 
@@ -546,12 +546,12 @@ vector<RealVariable> solver::operator==(double number, vector<RealVariable> vec)
 
 //////////// complex section//////////////
 
-bool compare_variable_by_degree_complex(ComplexVariable v1, ComplexVariable v2)
+bool solver::compare_variable_by_degree_complex(ComplexVariable v1, ComplexVariable v2)
 {
     return v1.degree > v2.degree;
 }
 
-vector<ComplexVariable> minimize(vector<ComplexVariable> vec)
+vector<ComplexVariable> solver::minimize(vector<ComplexVariable> vec)
 {
 
     sort(vec.begin(), vec.end(), compare_variable_by_degree_complex);
@@ -596,7 +596,7 @@ vector<ComplexVariable> minimize(vector<ComplexVariable> vec)
     return new_vec;
 }
 
-complex<double> linear_solver_complex(vector<ComplexVariable> elements)
+complex<double> solver::linear_solver_complex(vector<ComplexVariable> elements)
 {
     complex<double> result(0, 0);
     double result_coef;

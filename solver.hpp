@@ -28,6 +28,69 @@ namespace solver
         }
 
         friend ostream &operator<<(ostream &out, RealVariable var);
+        // realVariable operators
+
+        //left
+        friend vector<RealVariable> operator^(RealVariable x, double number);
+        friend vector<RealVariable> operator*(RealVariable x, double number);
+        friend vector<RealVariable> operator+(RealVariable var, double number);
+        friend vector<RealVariable> operator-(RealVariable var, double number);
+        friend vector<RealVariable> operator/(RealVariable var, double number);
+
+        //rigth
+        friend vector<RealVariable> operator*(double number, RealVariable x);
+        friend vector<RealVariable> operator+(double number, RealVariable x);
+        friend vector<RealVariable> operator-(double number, RealVariable var);
+
+        //both
+
+        friend vector<RealVariable> operator*(RealVariable x1, RealVariable x);
+        friend vector<RealVariable> operator-(RealVariable x, RealVariable x1);
+        friend vector<RealVariable> operator/(RealVariable var, RealVariable var2);
+        friend vector<RealVariable> operator+(RealVariable x, RealVariable x1); //
+
+        //vector
+        //left
+        friend vector<RealVariable> operator^(vector<RealVariable> vec, double number);
+
+        friend vector<RealVariable> operator*(vector<RealVariable> vec, double num);
+        friend vector<RealVariable> operator*(vector<RealVariable> vec, RealVariable x);            //
+        friend vector<RealVariable> operator*(vector<RealVariable> vec, vector<RealVariable> vec1); //
+
+        friend vector<RealVariable> operator+(vector<RealVariable> vec1, vector<RealVariable> vec2);
+        friend vector<RealVariable> operator+(vector<RealVariable> vec, double number);
+        friend vector<RealVariable> operator+(vector<RealVariable> vec, RealVariable x);
+
+        friend vector<RealVariable> operator-(vector<RealVariable> vec1, vector<RealVariable> vec2);
+        friend vector<RealVariable> operator-(vector<RealVariable> vec, double number);
+        friend vector<RealVariable> operator-(vector<RealVariable> vec, RealVariable var);
+
+        friend vector<RealVariable> operator/(vector<RealVariable> vec, RealVariable var);
+        friend vector<RealVariable> operator/(vector<RealVariable> vec, double number);
+
+        //right
+
+        friend vector<RealVariable> operator*(double num, vector<RealVariable> vec);
+        friend vector<RealVariable> operator*(RealVariable x, vector<RealVariable> vec); ///
+
+        friend vector<RealVariable> operator+(double number, vector<RealVariable> vec);
+        friend vector<RealVariable> operator+(RealVariable x, vector<RealVariable> vec);
+
+        friend vector<RealVariable> operator-(double number, vector<RealVariable> vec);
+        friend vector<RealVariable> operator-(RealVariable var, vector<RealVariable> vec);
+
+        // vector<RealVariable> operator/(vector<RealVariable> vec, RealVariable var); //
+        // vector<RealVariable> operator/(vector<RealVariable> vec, double number);    //
+
+        // equals
+        friend vector<RealVariable> operator==(RealVariable v1, RealVariable v);
+        friend vector<RealVariable> operator==(vector<RealVariable> vec, RealVariable v);
+        friend vector<RealVariable> operator==(RealVariable v, vector<RealVariable> vec);
+
+        friend vector<RealVariable> operator==(double number, vector<RealVariable> vec);
+
+        friend vector<RealVariable> operator==(vector<RealVariable> vec, double number);
+        friend vector<RealVariable> operator==(vector<RealVariable> vec, vector<RealVariable> vec2);
     };
     class ComplexVariable : public RealVariable
 
@@ -40,133 +103,76 @@ namespace solver
         }
 
         friend ostream &operator<<(ostream &out, const ComplexVariable &var);
+
+        /////// complex:
+
+        //left
+
+        friend vector<ComplexVariable> operator^(ComplexVariable x, double number);
+        friend vector<ComplexVariable> operator*(ComplexVariable x, double number);
+        friend vector<ComplexVariable> operator+(ComplexVariable x, double number);
+        friend vector<ComplexVariable> operator-(ComplexVariable x, double number);
+        friend vector<ComplexVariable> operator/(ComplexVariable x, double number);
+
+        // right
+
+        friend vector<ComplexVariable> operator*(double number, ComplexVariable x);
+        friend vector<ComplexVariable> operator+(double number, ComplexVariable x);
+        friend vector<ComplexVariable> operator-(double number, ComplexVariable y);
+
+        // both
+        friend vector<ComplexVariable> operator*(ComplexVariable y1, ComplexVariable y);
+
+        // vector - left
+
+        friend vector<ComplexVariable> operator^(vector<ComplexVariable> vec, double number);
+
+        friend vector<ComplexVariable> operator+(vector<ComplexVariable> vec1, vector<ComplexVariable> vec2);
+        friend vector<ComplexVariable> operator+(vector<ComplexVariable> vec, double number);
+
+        friend vector<ComplexVariable> operator+(vector<ComplexVariable> vec, complex<double> number);
+        friend vector<ComplexVariable> operator-(vector<ComplexVariable> vec1, vector<ComplexVariable> vec2);
+        friend vector<ComplexVariable> operator-(vector<ComplexVariable> vec, double number);
+        friend vector<ComplexVariable> operator-(vector<ComplexVariable> vec, ComplexVariable var);
+        friend vector<ComplexVariable> operator-(vector<ComplexVariable> vec, complex<double> c);
+        friend vector<ComplexVariable> operator/(vector<ComplexVariable> vec, double number);
+
+        // vector - right
+
+        friend vector<ComplexVariable> operator+(double number, vector<ComplexVariable> vec);
+        friend vector<ComplexVariable> operator+(complex<double> number, vector<ComplexVariable> vec);
+        friend vector<ComplexVariable> operator-(complex<double> c, vector<ComplexVariable> vec);
+        // imaginary
+
+        friend vector<ComplexVariable> operator+(ComplexVariable var, complex<double> number);
+        friend vector<ComplexVariable> operator+(complex<double> number, ComplexVariable var);
+        friend vector<ComplexVariable> operator+(double number, complex<double> c); //
+        friend vector<ComplexVariable> operator+(complex<double> c, double number); //
+        friend vector<ComplexVariable> operator-(ComplexVariable y, complex<double> c);
+        friend vector<ComplexVariable> operator-(complex<double> c, ComplexVariable y);
+        friend vector<ComplexVariable> operator-(double number, complex<double> c);
+        friend vector<ComplexVariable> operator-(complex<double> c, double number);
+        friend vector<ComplexVariable> operator==(vector<ComplexVariable> vec, ComplexVariable v);
+        friend vector<ComplexVariable> operator==(vector<ComplexVariable> vec, double number);
+        friend vector<ComplexVariable> operator==(vector<ComplexVariable> vec, complex<double> c);
+        friend vector<ComplexVariable> operator==(double number, vector<ComplexVariable> vec);
+        friend vector<ComplexVariable> operator==(complex<double> c, vector<ComplexVariable> vec);
+        friend vector<ComplexVariable> operator==(double number, ComplexVariable y);
+        friend vector<ComplexVariable> operator==(ComplexVariable v, vector<ComplexVariable> vec);
+        friend vector<ComplexVariable> operator==(ComplexVariable v, ComplexVariable v1);
+        friend vector<ComplexVariable> operator==(ComplexVariable y, double number);
+        friend vector<ComplexVariable> operator==(ComplexVariable y, complex<double> c);
+        friend vector<ComplexVariable> operator==(complex<double> c, ComplexVariable y);
+        friend vector<ComplexVariable> operator==(vector<ComplexVariable> vec, vector<ComplexVariable> vec2);
     };
-    // realVariable operators
-
-    //left
-    vector<RealVariable> operator^(RealVariable x, double number);
-    vector<RealVariable> operator*(RealVariable x, double number);
-    vector<RealVariable> operator+(RealVariable var, double number);
-    vector<RealVariable> operator-(RealVariable var, double number);
-    vector<RealVariable> operator/(RealVariable var, double number);
-
-    //rigth
-    vector<RealVariable> operator*(double number, RealVariable x);
-    vector<RealVariable> operator+(double number, RealVariable x);
-    vector<RealVariable> operator-(double number, RealVariable var);
-
-    //both
-
-    vector<RealVariable> operator*(RealVariable x1, RealVariable x);
-    vector<RealVariable> operator-(RealVariable x, RealVariable x1);
-    vector<RealVariable> operator/(RealVariable var, RealVariable var2);
-    vector<RealVariable> operator+(RealVariable x, RealVariable x1); //
-
-    //vector
-    //left
-    vector<RealVariable> operator^(vector<RealVariable> vec, double number);
-
-    vector<RealVariable> operator*(vector<RealVariable> vec, double num);
-    vector<RealVariable> operator*(vector<RealVariable> vec, RealVariable x);            //
-    vector<RealVariable> operator*(vector<RealVariable> vec, vector<RealVariable> vec1); //
-
-    vector<RealVariable> operator+(vector<RealVariable> vec1, vector<RealVariable> vec2);
-    vector<RealVariable> operator+(vector<RealVariable> vec, double number);
-    vector<RealVariable> operator+(vector<RealVariable> vec, RealVariable x);
-
-    vector<RealVariable> operator-(vector<RealVariable> vec1, vector<RealVariable> vec2);
-    vector<RealVariable> operator-(vector<RealVariable> vec, double number);
-    vector<RealVariable> operator-(vector<RealVariable> vec, RealVariable var);
-
-    vector<RealVariable> operator/(vector<RealVariable> vec, RealVariable var);
-    vector<RealVariable> operator/(vector<RealVariable> vec, double number);
-
-    //right
-
-    vector<RealVariable> operator*(double num, vector<RealVariable> vec);
-    vector<RealVariable> operator*(RealVariable x, vector<RealVariable> vec); ///
-
-    vector<RealVariable> operator+(double number, vector<RealVariable> vec);
-    vector<RealVariable> operator+(RealVariable x, vector<RealVariable> vec);
-
-    vector<RealVariable> operator-(double number, vector<RealVariable> vec);
-    vector<RealVariable> operator-(RealVariable var, vector<RealVariable> vec);
-
-    // vector<RealVariable> operator/(vector<RealVariable> vec, RealVariable var); //
-    // vector<RealVariable> operator/(vector<RealVariable> vec, double number);    //
-
-    // equals
-    vector<RealVariable> operator==(RealVariable v1, RealVariable v);
-    vector<RealVariable> operator==(vector<RealVariable> vec, RealVariable v);
-    vector<RealVariable> operator==(RealVariable v, vector<RealVariable> vec);
-
-    vector<RealVariable> operator==(double number, vector<RealVariable> vec);
-
-    vector<RealVariable> operator==(vector<RealVariable> vec, double number);
-    vector<RealVariable> operator==(vector<RealVariable> vec, vector<RealVariable> vec2);
-
-    /////// complex:
-
-    //left
-
-    vector<ComplexVariable> operator^(ComplexVariable x, double number);
-    vector<ComplexVariable> operator*(ComplexVariable x, double number);
-    vector<ComplexVariable> operator+(ComplexVariable x, double number);
-    vector<ComplexVariable> operator-(ComplexVariable x, double number);
-    vector<ComplexVariable> operator/(ComplexVariable x, double number);
-
-    // right
-
-    vector<ComplexVariable> operator*(double number, ComplexVariable x);
-    vector<ComplexVariable> operator+(double number, ComplexVariable x);
-    vector<ComplexVariable> operator-(double number, ComplexVariable y);
-
-    // both
-    vector<ComplexVariable> operator*(ComplexVariable y1, ComplexVariable y);
-
-    // vector - left
-
-    vector<ComplexVariable> operator^(vector<ComplexVariable> vec, double number);
-
-    vector<ComplexVariable> operator+(vector<ComplexVariable> vec1, vector<ComplexVariable> vec2);
-    vector<ComplexVariable> operator+(vector<ComplexVariable> vec, double number);
-
-    vector<ComplexVariable> operator+(vector<ComplexVariable> vec, complex<double> number);
-    vector<ComplexVariable> operator-(vector<ComplexVariable> vec1, vector<ComplexVariable> vec2);
-    vector<ComplexVariable> operator-(vector<ComplexVariable> vec, double number);
-    vector<ComplexVariable> operator-(vector<ComplexVariable> vec, ComplexVariable var);
-    vector<ComplexVariable> operator-(vector<ComplexVariable> vec, complex<double> c);
-    vector<ComplexVariable> operator/(vector<ComplexVariable> vec, double number);
-
-    // vector - right
-
-    vector<ComplexVariable> operator+(double number, vector<ComplexVariable> vec);
-    vector<ComplexVariable> operator+(complex<double> number, vector<ComplexVariable> vec);
-    vector<ComplexVariable> operator-(complex<double> c, vector<ComplexVariable> vec);
-    // imaginary
-
-    vector<ComplexVariable> operator+(ComplexVariable var, complex<double> number);
-    vector<ComplexVariable> operator+(complex<double> number, ComplexVariable var);
-    vector<ComplexVariable> operator+(double number, complex<double> c); //
-    vector<ComplexVariable> operator+(complex<double> c, double number); //
-    vector<ComplexVariable> operator-(ComplexVariable y, complex<double> c);
-    vector<ComplexVariable> operator-(complex<double> c, ComplexVariable y);
-    vector<ComplexVariable> operator-(double number, complex<double> c);
-    vector<ComplexVariable> operator-(complex<double> c, double number);
-    vector<ComplexVariable> operator==(vector<ComplexVariable> vec, ComplexVariable v);
-    vector<ComplexVariable> operator==(vector<ComplexVariable> vec, double number);
-    vector<ComplexVariable> operator==(vector<ComplexVariable> vec, complex<double> c);
-    vector<ComplexVariable> operator==(double number, vector<ComplexVariable> vec);
-    vector<ComplexVariable> operator==(complex<double> c, vector<ComplexVariable> vec);
-    vector<ComplexVariable> operator==(double number, ComplexVariable y);
-    vector<ComplexVariable> operator==(ComplexVariable v, vector<ComplexVariable> vec);
-    vector<ComplexVariable> operator==(ComplexVariable v, ComplexVariable v1);
-    vector<ComplexVariable> operator==(ComplexVariable y, double number);
-    vector<ComplexVariable> operator==(ComplexVariable y, complex<double> c);
-    vector<ComplexVariable> operator==(complex<double> c, ComplexVariable y);
-    vector<ComplexVariable> operator==(vector<ComplexVariable> vec, vector<ComplexVariable> vec2);
-
     //solve functions:
+    double linear_solver(vector<RealVariable> elements);
+    vector<RealVariable> minimize(vector<RealVariable> vec);
+    bool compare_variable_by_degree(RealVariable v1, RealVariable v2);
+    complex<double> linear_solver_complex(vector<ComplexVariable> elements);
+    vector<ComplexVariable> minimize(vector<ComplexVariable> vec);
+    bool compare_variable_by_degree_complex(ComplexVariable v1, ComplexVariable v2);
+
     std::complex<double> solve(vector<ComplexVariable> elements);
     double solve(vector<RealVariable> elements);
 
