@@ -147,6 +147,8 @@ namespace solver
 
     vector<ComplexVariable> operator+(ComplexVariable var, complex<double> number);
     vector<ComplexVariable> operator+(complex<double> number, ComplexVariable var);
+    vector<ComplexVariable> operator+(double number, complex<double> c); //
+    vector<ComplexVariable> operator+(complex<double> c, double number); //
     vector<ComplexVariable> operator-(ComplexVariable y, complex<double> c);
     vector<ComplexVariable> operator-(complex<double> c, ComplexVariable y);
     vector<ComplexVariable> operator-(double number, complex<double> c);
@@ -157,17 +159,15 @@ namespace solver
     vector<ComplexVariable> operator==(double number, vector<ComplexVariable> vec);
     vector<ComplexVariable> operator==(complex<double> c, vector<ComplexVariable> vec);
     vector<ComplexVariable> operator==(double number, ComplexVariable y);
-    vector<ComplexVariable> operator==(double number, complex<double> c);
     vector<ComplexVariable> operator==(ComplexVariable v, vector<ComplexVariable> vec);
     vector<ComplexVariable> operator==(ComplexVariable v, ComplexVariable v1);
     vector<ComplexVariable> operator==(ComplexVariable y, double number);
     vector<ComplexVariable> operator==(ComplexVariable y, complex<double> c);
     vector<ComplexVariable> operator==(complex<double> c, ComplexVariable y);
-    vector<ComplexVariable> operator==(complex<double> c, double number);
+    vector<ComplexVariable> operator==(vector<ComplexVariable> vec, vector<ComplexVariable> vec2);
 
-    
+    //solve functions:
     std::complex<double> solve(vector<ComplexVariable> elements);
-
     double solve(vector<RealVariable> elements);
 
 } // namespace solver

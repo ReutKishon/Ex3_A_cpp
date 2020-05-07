@@ -703,6 +703,7 @@ std::complex<double> solver::solve(vector<ComplexVariable> elements)
         cout << "x2 = " << realPart << "-" << imaginaryPart << "i" << endl;
         return x2;
     }
+    throw("No solution!");
 }
 
 ostream &operator<<(ostream &out, const solver::ComplexVariable &var)
@@ -747,22 +748,6 @@ vector<ComplexVariable> solver::operator*(ComplexVariable y1, ComplexVariable y)
     throw("the degree is greater than 2!");
 }
 
-// vector<ComplexVariable> solver::operator^(vector<ComplexVariable> vec, double number)
-// {
-
-//     for (auto &v : vec)
-//     {
-//         if (v.degree *= number < 2)
-//             v.degree *= number;
-//         else
-//         {
-//             throw("degree is greater than 2!");
-//         }
-//     }
-
-//     return vec;
-// }
-
 vector<ComplexVariable> solver::operator^(ComplexVariable x, double number)
 {
     if (x.degree * number < 3)
@@ -779,6 +764,26 @@ vector<ComplexVariable> solver::operator+(vector<ComplexVariable> vec1, vector<C
 {
     vec1.insert(vec1.end(), vec2.begin(), vec2.end());
     return vec1;
+}
+
+vector<ComplexVariable> solver::operator+(double number, complex<double> c)
+{
+    vector<ComplexVariable> vec;
+    ComplexVariable var1(number, 0, 0);
+    ComplexVariable var2(real(c), 0, imag(c));
+    vec.push_back(var1);
+    vec.push_back(var2);
+    return vec;
+}
+
+vector<ComplexVariable> solver::operator+(complex<double> c, double number)
+{
+    vector<ComplexVariable> vec;
+    ComplexVariable var1(number, 0, 0);
+    ComplexVariable var2(real(c), 0, imag(c));
+    vec.push_back(var1);
+    vec.push_back(var2);
+    return vec;
 }
 
 vector<ComplexVariable> solver::operator+(ComplexVariable var, double number)
@@ -1056,15 +1061,7 @@ vector<ComplexVariable> solver::operator==(double number, ComplexVariable y)
     return vec;
 }
 
-vector<ComplexVariable> solver::operator==(double number, complex<double> c)
-{
-    vector<ComplexVariable> vec;
-    ComplexVariable var1(number, 0, 0);
-    ComplexVariable var2(-1 * real(c), 0, -1 * imag(c));
-    vec.push_back(var1);
-    vec.push_back(var2);
-    return vec;
-}
+
 
 vector<ComplexVariable> solver::operator==(ComplexVariable v, vector<ComplexVariable> vec)
 {
@@ -1117,12 +1114,4 @@ vector<ComplexVariable> solver::operator==(complex<double> c, ComplexVariable y)
     return vec;
 }
 
-vector<ComplexVariable> solver::operator==(complex<double> c, double number)
-{
-    vector<ComplexVariable> vec;
-    ComplexVariable var1(number, 0, 0);
-    ComplexVariable var2(-1 * real(c), 0, -1 * imag(c));
-    vec.push_back(var1);
-    vec.push_back(var2);
-    return vec;
-}
+
